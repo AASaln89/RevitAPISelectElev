@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Assembly>"C:\Program Files\RevitAPITrainig\RevitAPISelectElev.dll"</Assembly>
+    <AddInId>1B8AE4A6-1355-48D7-9794-997C853589D0</AddInId>
+    <FullClassName>RevitAPISelectElev.Main</FullClassName>
+    <VendorId>ADSK</VendorId>
+    <Text>RevitAPISelectElev</Text>
+  </AddIn>
+</RevitAddIns>
