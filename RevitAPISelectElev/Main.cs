@@ -33,32 +33,12 @@ namespace RevitAPISelectElev
 
             foreach (var level in levels)
             {
-                duct = new FilteredElementCollector(doc)
-                    .OfCategory(BuiltInCategory.OST_DuctCurves)
-                    .WhereElementIsNotElementType()
-                    .WherePasses(new ElementLevelFilter(levelId));
+                Element element = doc.GetElement(levelId);
+                if (element is Duct)
+                {
+
+                }
             }
-
-
-            //var duct1level = new List<Duct>();
-            //var duct2Level = new List<Duct>();
-
-            //string Level = string.Empty;
-            //foreach (Duct duct in ductsList)
-            //{
-            //    Parameter DuctLevel = duct.get_Parameter(BuiltInParameter.RBS_START_LEVEL_PARAM);
-            //    string L = DuctLeveL.AsValueString().ToString();
-            //    if (L == "Level 1")
-            //    {
-            //        duct1level.Add(duct);
-            //    }
-            //    if (L == "Level 2")
-            //    {
-            //        duct2Level.Add(duct);
-            //    }
-            //}
-            //Level += $"Количество 1 этаж: {duct1level.Count}{Environment.NewLine} Количество 2 этаж: {duct2Level.Count}";
-            //Level += $"ObschKol-vo: {ductsList.Count}";
             TaskDialog.Show("123", $"{levels.ToString()} {Environment.NewLine} {duct.ToString()}");
 
             return Result.Succeeded;
