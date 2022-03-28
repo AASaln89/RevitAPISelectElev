@@ -36,7 +36,6 @@ namespace RevitAPISelectElev
                 Element element = doc.GetElement(levelId);
                 if (element is Duct)
                 {
-
                 }
             }
             TaskDialog.Show("123", $"{levels.ToString()} {Environment.NewLine} {duct.ToString()}");
