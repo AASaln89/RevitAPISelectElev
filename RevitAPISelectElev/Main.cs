@@ -14,32 +14,29 @@ namespace RevitAPISelectElev
     [Transaction(TransactionMode.Manual)]
     public class Main : IExternalCommand
     {
-        private ElementId levelId;
-
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
-            FilteredElementCollector levels = new FilteredElementCollector(doc)
-                .OfCategory(BuiltInCategory.OST_Levels)
-                .WhereElementIsNotElementType();
+            var levels = new FilteredElementCollector(doc)
+                    .OfCategory(BuiltInCategory.OST_Levels)
+                    .WhereElementIsNotElementType();
 
-            var duct = new FilteredElementCollector(doc)
-                    .OfCategory(BuiltInCategory.OST_DuctCurves)
-                    .WhereElementIsNotElementType()
-                    .WherePasses(new ElementLevelFilter(levelId));
+            string msg = "";
 
             foreach (var level in levels)
             {
-                Element element = doc.GetElement(levelId);
-                if (element is Duct)
-                {
-                }
+                var ducts = new FilteredElementCollector(doc)
+                    .OfCategory(BuiltInCategory.OST_DuctCurves)
+                    .WhereElementIsNotElementType()
+                    .WherePasses(new ElementLevelFilter(level.Id));
+                int ductCount = ducts.GetElementCount();
+                msg += $"{level.Name}:{ductCount}\n";
             }
-            TaskDialog.Show("123", $"{levels.ToString()} {Environment.NewLine} {duct.ToString()}");
 
+            TaskDialog.Show("Duct Count", msg);
             return Result.Succeeded;
         }
     }
