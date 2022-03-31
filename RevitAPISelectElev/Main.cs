@@ -32,11 +32,13 @@ namespace RevitAPISelectElev
                     .OfCategory(BuiltInCategory.OST_DuctCurves)
                     .WhereElementIsNotElementType()
                     .WherePasses(new ElementLevelFilter(level.Id));
+
                 int ductCount = ducts.GetElementCount();
                 msg += $"{level.Name}:{ductCount}\n";
             }
 
             TaskDialog.Show("Duct Count", msg);
+
             return Result.Succeeded;
         }
     }
